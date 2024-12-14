@@ -12,14 +12,16 @@
 # 更新时间：2023-06-02
 
 [Argument]
+
 #参数变量名 = 类型,"参数值1","参数值2",tag=参数在UI上显示的名字,desc=参数在UI上显示详细介绍
+cron1=input,"30 7 * * *",tag=cron
 arg1=switch,true,tag=开启获取B站Cookie(APP)
 arg2=switch,true,tag=取B站Cookie(网页)
 
 [Script]
 # BiliBili每日等级任务
-cron "30 7 * * *" script-path=https://raw.githubusercontent.com/ClydeTime/BiliBili/main/js/BiliBiliDailyBonus.js, tag=B站每日等级任务
-
+#cron "30 7 * * *" script-path=https://raw.githubusercontent.com/ClydeTime/BiliBili/main/js/BiliBiliDailyBonus.js, tag=B站每日等级任务
+cron {cron1} script-path=https://raw.githubusercontent.com/ClydeTime/BiliBili/main/js/BiliBiliDailyBonus.js, tag=B站每日等级任务
 http-request ^https?:\/\/app\.bilibili\.com\/x\/resource\/fingerprint\? script-path=https://raw.githubusercontent.com/ClydeTime/BiliBili/main/js/BiliBiliDailyBonus.js, tag=取B站Cookie(APP),enable={arg1}
 
 http-request ^https?:\/\/m.bilibili.com/$ script-path=https://raw.githubusercontent.com/ClydeTime/BiliBili/main/js/BiliBiliDailyBonus.js, tag=取B站Cookie(网页),enable={arg2}
