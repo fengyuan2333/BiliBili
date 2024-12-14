@@ -17,7 +17,6 @@
 cron1=input,"30 7 * * *",tag=定时参数
 arg1=switch,true,tag=开启获取B站Cookie(APP)
 arg2=switch,true,tag=取B站Cookie(网页)
-hostname1=input,'www.baidu.com',tag=测试hostname
 
 [Script]
 # BiliBili每日等级任务
