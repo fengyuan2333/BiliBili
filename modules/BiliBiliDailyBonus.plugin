@@ -14,22 +14,26 @@
 [Argument]
 
 #参数变量名 = 类型,"参数值1","参数值2",tag=参数在UI上显示的名字,desc=参数在UI上显示详细介绍
-cron1=input,"30 7 * * *",tag=1-b站签到定时参数
+cron1=input,"0 9 * * *",tag=1-b站签到定时参数
 bt=switch,true,tag=1-开启b站自动签到（填写定时参数）
 arg1=switch,true,tag=1-捕获B站Cookie(APP)
 arg2=switch,true,tag=1-捕获B站Cookie(网页)
 
-hx_cron1=input,"30 7 * * *",tag=2-鸿星尔克签到定时参数
+hx_cron1=input,"0 9 * * *",tag=2-鸿星尔克签到定时参数
 hxek_qd=switch,true,tag=2-开启鸿星尔克自动签到（填写定时参数）
 hxer_cookie=switch,true,tag=2-捕获鸿星尔克Cookie
 
-iqy_cron1=input,"30 7 * * *",tag=3-爱奇艺签到定时参数
+iqy_cron1=input,"0 9 * * *",tag=3-爱奇艺签到定时参数
 iqy_qd=switch,true,tag=3-开启爱奇艺自动签到（填写定时参数）
 iqy_cookie=switch,true,tag=3-捕获爱奇艺Cookie
 
-bilim_cron1=input,"30 7 * * *",tag=4-bili漫画定时参数
+bilim_cron1=input,"0 9 * * *",tag=4-bili漫画定时参数
 bilim_qd=switch,true,tag=4-开启bili漫画自动签到（填写定时参数）
 bilim_cookie=switch,true,tag=4-捕获bili漫画Cookie
+
+gd_cron1=input,"0 9 * * *",tag=5-高德定时参数
+gd_qd=switch,true,tag=5-开启高德打车自动签到（填写定时参数）
+gd_cookie=switch,true,tag=5-捕获高德打车Cookie
 
 [Script]
 # BiliBili每日等级任务
@@ -51,6 +55,10 @@ http-request ^https:\/\/passport\.iqiyi\.com\/apis\/user\/ script-path=https://r
 cron {bilim_cron1} script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Bilibili-DailyBonus/Manga.js, tag=4-bili漫画签到,enable={bilim_qd}
 http-request ^https:\/\/app\.bilibili\.com\/x\/v2\/account\/myinfo script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Bilibili-DailyBonus/Manga.js, tag=4-捕获bili漫画Cookie,enable={bilim_cookie}
 
+#高德地图打车签到
+cron {gd_cron1} script-path=https://raw.githubusercontent.com/wf021325/qx/master/task/ampDache.js, tag=5-高德地图打车签到,enable={gd_qd}
+http-response ^https?:\/\/(m5(|-zb)|dache)\.amap\.com\/(ws\/yuece\/(act|openapi\/activity\/current)\/query|common\/(alipaymini|wxmini)\?_ENCRYPT=) script-path=https://raw.githubusercontent.com/wf021325/qx/master/task/ampDache.js, requires-body=true, enabled=false, tag=5-高德打车签到cookies,enable={gd_cookie}
+
 
 [MITM]
-hostname = app.bilibili.com, m.bilibili.com, hope.demogic.com, passport.iqiyi.com
+hostname = app.bilibili.com, m.bilibili.com, hope.demogic.com, passport.iqiyi.com, *.amap.com
