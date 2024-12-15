@@ -49,7 +49,7 @@ http-request ^https:\/\/passport\.iqiyi\.com\/apis\/user\/ script-path=https://r
 
 #bili漫画签到
 cron {bilim_cron1} script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Bilibili-DailyBonus/Manga.js, tag=4-bili漫画签到,enable={bilim_qd}
-http-request ^https:\/\/app\.bilibili\.com\/x\/v2\/account\/myinfo script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Bilibili-DailyBonus/Manga.js, tag=4-捕获bili漫画Cookieenable={bilim_cookie}
+http-request ^https:\/\/app\.bilibili\.com\/x\/v2\/account\/myinfo script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Bilibili-DailyBonus/Manga.js, tag=4-捕获bili漫画Cookie,enable={bilim_cookie}
 
 
 [MITM]
