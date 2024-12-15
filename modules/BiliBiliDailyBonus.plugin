@@ -1,4 +1,4 @@
-#!name=BiliBili每日等级任务
+#!name=风原-签到任务
 #!desc=定时任务及Cookie获取
 #!author= MartinsKing（@ClydeTime）
 #!homepage= https://github.com/ClydeTime/BiliBili/tree/master
@@ -9,22 +9,29 @@
 # 任务奖励：经验值/硬币/大会员积分/年度会员领取B币等
 # ================ Boxjs订阅 ================
 # 订阅地址：https://raw.githubusercontent.com/ClydeTime/BiliBili/main/boxjs/BiliBili.boxjs.json
-# 更新时间：2023-06-02
+# 更新时间：2024-12-15
 
 [Argument]
 
 #参数变量名 = 类型,"参数值1","参数值2",tag=参数在UI上显示的名字,desc=参数在UI上显示详细介绍
-cron1=input,"30 7 * * *",tag=1-b站自动签到定时参数
+cron1=input,"30 7 * * *",tag=1-b站签到定时参数
 bt=switch,true,tag=1-开启b站自动签到（填写定时参数）
-arg1=switch,true,tag=1-开启获取B站Cookie(APP)
-arg2=switch,true,tag=1-开启取B站Cookie(网页)
+arg1=switch,true,tag=1-捕获B站Cookie(APP)
+arg2=switch,true,tag=1-捕获B站Cookie(网页)
+
+hx_cron1=input,"30 7 * * *",tag=2-鸿星尔克签到定时参数
+hxek_qd=switch,true,tag=2-开启鸿星尔克自动签到（填写定时参数）
+hxer_cookie=switch,true,tag=2-捕获鸿星尔克Cookie
 
 [Script]
 # BiliBili每日等级任务
 #cron "30 7 * * *" script-path=https://raw.githubusercontent.com/ClydeTime/BiliBili/main/js/BiliBiliDailyBonus.js, tag=1-B站每日等级任务
 cron {cron1} script-path=https://raw.githubusercontent.com/ClydeTime/BiliBili/main/js/BiliBiliDailyBonus.js, tag=1-B站每日等级任务,enable={bt}
-http-request ^https?:\/\/app\.bilibili\.com\/x\/resource\/fingerprint\? script-path=https://raw.githubusercontent.com/ClydeTime/BiliBili/main/js/BiliBiliDailyBonus.js, tag=1-取cookies-B站Cookie(APP),enable={arg1}
-http-request ^https?:\/\/m.bilibili.com/$ script-path=https://raw.githubusercontent.com/ClydeTime/BiliBili/main/js/BiliBiliDailyBonus.js, tag=1-取cookies-B站Cookie(网页),enable={arg2}
+http-request ^https?:\/\/app\.bilibili\.com\/x\/resource\/fingerprint\? script-path=https://raw.githubusercontent.com/ClydeTime/BiliBili/main/js/BiliBiliDailyBonus.js, tag=1-捕获B站Cookie(APP),enable={arg1}
+http-request ^https?:\/\/m.bilibili.com/$ script-path=https://raw.githubusercontent.com/ClydeTime/BiliBili/main/js/BiliBiliDailyBonus.js, tag=1-捕获B站Cookie(网页),enable={arg2}
 
+#鸿星尔克小程序签到
+cron {hx_cron1} script-path=https://raw.githubusercontent.com/Former-Years/Surge/refs/heads/main/Script/erke.js, tag=2-鸿星尔克签到,enable={hxek_qd}
+http-request ^https:\/\/hope\.demogic\.com\/gic-wx-app\/get-member-asset\.json script-path=https://raw.githubusercontent.com/Former-Years/Surge/refs/heads/main/Script/erke.js, tag=2-捕获鸿星尔克Cookie,enable={hxer_cookie}
 [MITM]
-hostname = app.bilibili.com, m.bilibili.com
+hostname = app.bilibili.com, m.bilibili.com, hope.demogic.com
