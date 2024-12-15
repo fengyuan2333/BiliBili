@@ -57,7 +57,7 @@ http-request ^https:\/\/app\.bilibili\.com\/x\/v2\/account\/myinfo script-path=h
 
 #高德地图打车签到
 cron {gd_cron1} script-path=https://raw.githubusercontent.com/wf021325/qx/master/task/ampDache.js, tag=5-高德地图打车签到,enable={gd_qd}
-http-response ^https?:\/\/(m5(|-zb)|dache)\.amap\.com\/(ws\/yuece\/(act|openapi\/activity\/current)\/query|common\/(alipaymini|wxmini)\?_ENCRYPT=) script-path=https://raw.githubusercontent.com/wf021325/qx/master/task/ampDache.js, requires-body=true, enabled=false, tag=5-高德打车签到cookies,enable={gd_cookie}
+http-response ^https?:\/\/(m5(|-zb)|dache)\.amap\.com\/(ws\/yuece\/(act|openapi\/activity\/current)\/query|common\/(alipaymini|wxmini)\?_ENCRYPT=) script-path=https://raw.githubusercontent.com/wf021325/qx/master/task/ampDache.js, requires-body=true, enabled=false, tag=5-捕获高德打车签到cookies,enable={gd_cookie}
 
 
 [MITM]
