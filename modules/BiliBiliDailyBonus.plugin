@@ -1,7 +1,7 @@
 #!name=风原-签到任务
 #!desc=定时任务及Cookie获取
-#!author= MartinsKing（@ClydeTime）
-#!homepage= https://github.com/ClydeTime/BiliBili/tree/master
+#!author= fengyuan2333（@ClydeTime）
+#!homepage= https://github.com/fengyuan2333/BiliBili/tree/master
 #!icon=https://raw.githubusercontent.com/ClydeTime/BiliBili/main/database/icon_Avatar.png
 #!category= MK
 # 现将获取cookie与定时任务合并为一个模块
@@ -27,6 +27,10 @@ iqy_cron1=input,"30 7 * * *",tag=3-爱奇艺签到定时参数
 iqy_qd=switch,true,tag=3-开启爱奇艺自动签到（填写定时参数）
 iqy_cookie=switch,true,tag=3-捕获爱奇艺Cookie
 
+bilim_cron1=input,"30 7 * * *",tag=4-bili漫画定时参数
+bilim_qd=switch,true,tag=4-开启bili漫画自动签到（填写定时参数）
+bilim_cookie=switch,true,tag=4-捕获bili漫画Cookie
+
 [Script]
 # BiliBili每日等级任务
 #cron "30 7 * * *" script-path=https://raw.githubusercontent.com/ClydeTime/BiliBili/main/js/BiliBiliDailyBonus.js, tag=1-B站每日等级任务
@@ -41,7 +45,12 @@ http-request ^https:\/\/hope\.demogic\.com\/gic-wx-app\/get-member-asset\.json s
 # 爱奇艺签到
 cron {iqy_cron1} script-path=https://raw.githubusercontent.com/NobyDa/Script/master/iQIYI-DailyBonus/iQIYI.js, tag=3-爱奇艺签到,enable={iqy_qd}
 # 获取Cookie
-http-request ^https:\/\/passport\.iqiyi\.com\/apis\/user\/ script-path=https://raw.githubusercontent.com/NobyDa/Script/master/iQIYI-DailyBonus/iQIYI.js, tag=2-捕获爱奇艺Cookie,enable={iqy_cookie}
+http-request ^https:\/\/passport\.iqiyi\.com\/apis\/user\/ script-path=https://raw.githubusercontent.com/NobyDa/Script/master/iQIYI-DailyBonus/iQIYI.js, tag=3-捕获爱奇艺Cookie,enable={iqy_cookie}
+
+#bili漫画签到
+cron {iqy_cron1} script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Bilibili-DailyBonus/Manga.js, tag=4-bili漫画签到,enable={bilim_qd}
+http-request ^https:\/\/app\.bilibili\.com\/x\/v2\/account\/myinfo script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Bilibili-DailyBonus/Manga.js,enable={bilim_cookie}
+
 
 [MITM]
 hostname = app.bilibili.com, m.bilibili.com, hope.demogic.com, passport.iqiyi.com
